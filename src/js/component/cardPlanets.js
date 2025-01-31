@@ -8,7 +8,7 @@ export const CardPlanets = (props) => {
   const { info, setInfo } = useState([])
 
   const infoPeople = async () => {
-    fetch(`https://www.swapi.tech/api/planets/${id}`)
+    fetch(`https://www.swapi.tech/api/planets/${props.id}`)
     .then(res => res.json())
     .then(data => console.log(data))
     .catch(err => console.error(err))

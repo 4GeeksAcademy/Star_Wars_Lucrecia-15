@@ -1,12 +1,14 @@
-import React from "react";
+import React, {  useContext  } from "react";
+import { Context } from "../store/appContext";
 import "../../styles/infocharacter.css";
 
 export const InfoCharacter = () => {
+    const { store, actions } = useContext(Context);
 
     return (
         <div>
             <div className="background-card text-warning bg-dark">
-                <img src={`https://starwars-visualguide.com/assets/img/characters/${props.character.id}.jpg`} className="card-img" alt="..." />
+                <img src={`https://starwars-visualguide.com/assets/img/characters/${character.id}.jpg`} className="card-img" alt="..." />
                 <div className="card-img-overlay">
                     <h1 className="card-title py-3">Characters</h1>
                     <p className="card-text">

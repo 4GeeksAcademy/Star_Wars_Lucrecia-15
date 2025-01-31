@@ -17,7 +17,7 @@ export const CardCharacter = ({props}) => {
 
   const infoPeople = async () => {
     try {
-      const response = await fetch(`https://www.swapi.tech/api/people/${id}`);
+      const response = await fetch(`https://www.swapi.tech/api/people/${props.id}`);
       const data = await response.json();
       setInfo(data);
     } catch (err) {
@@ -31,7 +31,7 @@ export const CardCharacter = ({props}) => {
 
   return (
     <div className="card">
-      <img src={`https://starwars-visualguide.com/assets/img/characters/${props.character.id}.jpg`} className="card-img-top" alt= {props.name} />
+      <img src={`https://starwars-visualguide.com/assets/img/characters/${props.id}.jpg`} className="card-img-top" alt= {props.name} />
       <div className="card-body">
         <h5 className="card-title">Name:{props.name}</h5>
         <p className="card-text">Gender:{props.gender}</p>

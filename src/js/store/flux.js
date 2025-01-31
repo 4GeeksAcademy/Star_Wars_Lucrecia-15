@@ -13,6 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				},
 			], character: [],
+			   vehicles:[],
+			   planets:[],
 			   favorites: [],
 		},
 		actions: {
@@ -40,12 +42,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 			getVehicles:async() =>{
-				const response = await fetch("https://www.swapi.tech/api/vehicle")
+				const response = await fetch("https://www.swapi.tech/api/vehicles")
 				const data= await response.json()
 				setStore({vehicles: data.results})
 			},
 			getPlanets: async () => {
-				const response = await fetch("https://www.swapi.tech/api/planet")
+				const response = await fetch("https://www.swapi.tech/api/planets")
 				const data= await response.json()
 				setStore({planets: data.results}) 
 			},
@@ -53,7 +55,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await fetch("https://www.swapi.tech/api/people")
 				const data= await response.json()
 				setStore({characters: data.results})
-			},
+			},  const addToLike : async (item) => {
+				if (!favoritos.includes(item)) {
+				  setLikes([...likes, item]);
+				}
+			  };
 			
 		}
 	};
