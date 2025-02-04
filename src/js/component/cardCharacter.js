@@ -1,45 +1,30 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import "../../styles/character.css";
-import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
+
+export const CardCharacter = ({ character }) => {
+  const { store, actions } = useContext(Context)
+
+  const handleFavorite = (name) => {
+    actions.handleFavorites(name)
+  }
+
+  const isFavorites = () => {
+    return store.favorites.includes(character.name)
+  }
 
 
-export const CardCharacter = ({props}) => {
-  const { store, actions } = useContext(Context);
-  const { info, setInfo } = useState([])
-  const {likes, setLikes} = useState([])
-
-  const addToLike = (item) => {
-    if (!favoritos.includes(item)) {
-      setLikes([...likes, item]);
-    }
-  }; //boton de favoritos (tendría que poner el .id en el onclick?)
-
-  const infoPeople = async () => {
-    try {
-      const response = await fetch(`https://www.swapi.tech/api/people/${props.id}`);
-      const data = await response.json();
-      setInfo(data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  useEffect(() => {
-    infoPeople()
-  }, [])
 
   return (
-    <div className="card">
-      <img src={`https://starwars-visualguide.com/assets/img/characters/${props.id}.jpg`} className="card-img-top" alt= {props.name} />
-      <div className="card-body">
-        <h5 className="card-title">Name:{props.name}</h5>
-        <p className="card-text">Gender:{props.gender}</p>
-        <p className="card-text">Heair color:{props.hair_color}</p>
-        <div className="containerButton d-flex justify-content-between">
-        <Link to="/info/:id"><a href="#" className="btn btn-warning">Learn More</a></Link>
-          <button onClick={()=> addToLike } className="btn btn-warning p-2"><i className="fa-solid fa-heart"></i></button>
-        </div>
+    <div className="card col-2 p-0 position-relative mx-3" key={character.uid || idx}>
+      <div className="img-container">
+        <img src={`https://starwars-visualguide.com/assets/img/characters/${character.uid}.jpg`} className="card-img" alt={character.name} />
+      </div>
+      <div className="card-body mb-4">
+        <h5 className="title mt-2">{character.name}</h5>
+        <Link to={`/character/${character.uid}`} className="btn btn-warning position-absolute bottom-0 start-0 mt-2">Read More</Link>
+        <button onClick={() => handleFavorite(character.name)} className="btn btn-warning position-absolute bottom-0 end-0"><i class={`fa-solid fa-heart ${isFavorites() ? "text-danger" : ""}`}></i></button>
       </div>
     </div>
   );

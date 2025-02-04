@@ -7,36 +7,38 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
 export const Planets = () => {
-    // Array de personajes
     const { store, actions } = useContext(Context)
 
+    const groupedPlanets = [];
+    if (store.planets) {
+        for (let i = 0; i < store.planets.length; i += 5) {
+            groupedPlanets.push(store.planets.slice(i, i + 5));
+        }
+    }
+
     return (
-        <div className="container-fluid py-4">
-            <h1 className="text-warning bg-dark">Planets!</h1>
-            <div id="carouselPlanets" className="carousel slide">
+        <div className="CarouselCard text-center pb-5" >
+            <h1 className="text-warning">Planets!</h1>
+            <div id="carouselExample2" className="carousel slide">
                 <div className="carousel-inner">
-                    <div className="carousel-item active">
-                        <div className="cards-wrapper">
-                            <CardPlanets />
-                            <CardPlanets />
-                            <CardPlanets />
-                            <CardPlanets />
+                    {groupedPlanets.map((group, index) => (
+                        <div
+                            key={index}
+                            className={`carousel-item ${index === 0 ? "active" : ""}`}
+                        >
+                            <div className=" col-12 row d-flex justify-content-center m-auto">
+                                {group.map((planet, index) => (
+                                    <CardPlanets key={planet.id} planet={planet} />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                    <div className="carousel-item">
-                        <div className="cards-wrapper">
-                            <CardPlanets />
-                            <CardPlanets />
-                            <CardPlanets />
-                            <CardPlanets />
-                        </div>
-                    </div>
+                    ))}
                 </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselPlanets" data-bs-slide="prev">
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample2" data-bs-slide="prev">
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Previous</span>
                 </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselPlanets" data-bs-slide="next">
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExample2" data-bs-slide="next">
                     <span className="carousel-control-next-icon " aria-hidden="true"></span>
                     <span className="visually-hidden">Next</span>
                 </button>
@@ -44,4 +46,3 @@ export const Planets = () => {
         </div>
     );
 };
-

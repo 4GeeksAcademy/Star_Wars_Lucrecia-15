@@ -1,43 +1,42 @@
 import React, { useState, useContext } from "react";
-import {CardVehicles} from "./cardVehicles"
+import { CardVehicles } from "./cardVehicles";
 import "../../styles/character.css";
-import { Context } from "../store/appContext"
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { Context } from "../store/appContext";
 
 
 export const Vehicles = () => {
-    // Array de personajes
     const { store, actions } = useContext(Context)
 
+    const groupedVehicles = [];
+    if (store.vehicles) {
+        for (let i = 0; i < store.vehicles.length; i += 5) {
+            groupedVehicles.push(store.vehicles.slice(i, i + 5));
+        }
+    }
 
     return (
-        <div className="container-fluid py-4">
-            <h1 className="text-warning bg-dark">Vehicles!</h1>
-            <div id="carouselVehicles" className="carousel slide">
+        <div className="CarouselCard text-center pb-5" >
+            <h1 className="text-warning">Vehicles!</h1>
+            <div id="carouselExample1" className="carousel slide">
                 <div className="carousel-inner">
-                    <div className="carousel-item active">
-                        <div className="cards-wrapper">
-                           <CardVehicles/>
-                           <CardVehicles/>
-                           <CardVehicles/>
-                           <CardVehicles/>
+                    {groupedVehicles.map((group, index) => (
+                        <div
+                            key={index}
+                            className={`carousel-item ${index === 0 ? "active" : ""}`}
+                        >
+                            <div className=" col-12 row d-flex justify-content-center m-auto">
+                                {group.map((vehicle, index) => (
+                                    <CardVehicles key={vehicle.uid} vehicle={vehicle} />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                    <div className="carousel-item">
-                        <div className="cards-wrapper">
-                           <CardVehicles/>
-                           <CardVehicles/>
-                           <CardVehicles/>
-                           <CardVehicles/> 
-                        </div>
-                    </div>
+                    ))}
                 </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselVehicles" data-bs-slide="prev">
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample1" data-bs-slide="prev">
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Previous</span>
                 </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselVehicles" data-bs-slide="next">
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExample1" data-bs-slide="next">
                     <span className="carousel-control-next-icon " aria-hidden="true"></span>
                     <span className="visually-hidden">Next</span>
                 </button>
@@ -45,4 +44,3 @@ export const Vehicles = () => {
         </div>
     );
 };
-

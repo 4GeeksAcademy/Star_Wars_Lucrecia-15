@@ -1,59 +1,89 @@
-.carousel-inner {
-  padding: 0;
-}
-
-.cards-wrapper {
-  display: flex;
-  justify-content: space-between;
-}
-
-.card {
-  width: 23%;  
-  margin: 0 0.5em;
-  box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
-  border: none;
-  padding: 0;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-  width: 4vh;
-  height: 4vh;
-  border-radius: 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #e1e1e1;
-}
-
-
-.carousel-item {
-  display: block;
-  margin-right: 0;
+.CarouselCard{
+  background-color: rgba(5, 5, 5, 0.671);
+  position: relative;
   width: 100%;
-  transition: 0;
+  overflow: visible;
+  padding: 0 60px;
+  
 }
 
-.carousel-control-prev {
-  left: -3em;
+.card-img{
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  
 }
 
-.carousel-control-next {
-  right: -3em;
+.img-container {
+  position: relative;
+  width: 100%;
+  height: 250px; 
+  overflow: hidden;
+}
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.808);
+  border-radius: 50%;
+  padding: 18px;
 }
 
 @media (max-width: 768px) {
-  .card {
-      width: calc(50% - 1em);  
-      margin-bottom: 1em;
+  .CarouselCard {
+    padding: 0 30px; /* Reduce el padding */
   }
-  
-  .cards-wrapper {
-      flex-wrap: wrap;
+
+  .img-container {
+    height: 200px; /* Reduce la altura de la imagen en el carrusel */
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    padding: 12px; /* Reduce el tamaño de los botones */
+  }
+
+  /* Ajustar la disposición de los nombres para que se alineen horizontalmente */
+  .card-name {
+    font-size: 10px; /* Reduce el tamaño de la fuente */
+    white-space: nowrap; /* Evita que los nombres se dividan en dos líneas */
+    text-overflow: ellipsis; /* Si el nombre es demasiado largo, agregamos puntos suspensivos */
+    overflow: hidden;
+  }
+
+  /* Asegurar que los botones no se superpongan */
+  .card-buttons {
+    flex-direction: column; /* Apila los botones verticalmente */
+    gap: 10px;
   }
 }
 
+/* Media queries para pantallas pequeñas (móviles) */
 @media (max-width: 576px) {
-  .card {
-      width: 100%;  
+  .CarouselCard {
+    padding: 0 5px; /* Reduce aún más el padding */
+  }
+
+  .img-container {
+    height: 130px; 
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    padding: 10px; 
+  }
+
+  /* Ajustar aún más el tamaño del nombre para pantallas pequeñas */
+  .card-image {
+    font-size: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  /* Asegurar que los botones estén bien alineados */
+  .card-buttons {
+    flex-direction: column; /* Los botones estarán apilados verticalmente */
+    gap: 8px;
   }
 }

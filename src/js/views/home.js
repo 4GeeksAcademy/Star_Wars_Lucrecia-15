@@ -1,10 +1,16 @@
 import React from "react";
 import "../../styles/home.css";
+import { Characters } from "../component/character";
+import { Planets } from "../component/planets";
+import { Vehicles } from "../component/vehicles";
+
 
 export const Home = () => (
-	<div className="text-center mt-5">
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
+    <div className="container">
+	<Characters />
+	<br></br>
+	<Planets/>
+	<br></br>
+	<Vehicles/>
 	</div>
-);
+	);

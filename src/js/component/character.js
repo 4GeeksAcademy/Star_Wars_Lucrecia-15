@@ -8,35 +8,31 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 export const Characters = () => {
     const { store, actions } = useContext(Context)
-    const { info, setInfo } = useState([])
+
+    const groupedCharacters = [];
+    if (store.characters) {
+        for (let i = 0; i < store.characters.length; i += 5) {
+            groupedCharacters.push(store.characters.slice(i, i + 5));
+        }
+    }
 
     return (
-        <div className="container-fluid">
-            <h1 className="text-warning bg-dark">Characters!</h1>
+        <div className="CarouselCard text-center pb-5" >
+            <h1 className="text-warning">Characters!</h1>
             <div id="carouselExample" className="carousel slide">
                 <div className="carousel-inner">
-                    <div className="carousel-item active">
-                        <div className="cards-wrapper">
-                            {info.map((Characters, index)=>(
-                            <CardCharacter
-                            key={index.id}
-                            uid={Characters.id}
-                            name={Characters.name}
-                            gender={Characters.gender}
-                            hair_color={Characters.hair_color} />))}
-                            <CardCharacter />
-                            <CardCharacter />
-                            <CardCharacter />
+                    {groupedCharacters.map((group, index) => (
+                        <div
+                            key={index}
+                            className={`carousel-item ${index === 0 ? "active" : ""}`}
+                        >
+                            <div className=" col-12 row d-flex justify-content-center m-auto">
+                                {group.map((character, index) => (
+                                    <CardCharacter key={character.uid} character={character} />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                    <div className="carousel-item">
-                        <div className="cards-wrapper">
-                            <CardCharacter />
-                            <CardCharacter />
-                            <CardCharacter />
-                            <CardCharacter />
-                        </div>
-                    </div>
+                    ))}
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -48,35 +44,6 @@ export const Characters = () => {
                 </button>
             </div>
         </div>
+        
     );
 };
-
-//<div className="controls flex justify-content-between">
-//<button onClick={handlePrev} disabled={currentIndex === 0}>prev</button>
-//<button onClick={handleNext} disabled={currentIndex + itemsForPage >= store.characters?.length}>next</button>
-//</div>
-//	const [currentIndex, setCurrentIndex] = useState(0);
-//const itemsForPage = 2
-// const handleNext = () => {
-// if (currentIndex + itemsForPage < store.characters.length) {
-// setCurrentIndex(currentIndex + itemsForPage)
-// }
-// }
-// const handlePrev = () => {
-// if (currentIndex - itemsForPage >= 0) {
-// setCurrentIndex(currentIndex - itemsForPage)
-// }
-// }
-// const currentItems = store.characters?.slice(currentIndex, currentIndex + itemsForPage)
-
-// const goLeft = () => {
-// setCurrentIndex((prevIndex) =>
-// prevIndex === 0 ? characters.length - 1 : prevIndex - 1
-// );
-// };
-
-// const goRight = () => {
-// setCurrentIndex((prevIndex) =>
-// prevIndex === characters.length - 1 ? 0 : prevIndex + 1
-// );
-// };

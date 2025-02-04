@@ -12,10 +12,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				},
-			], character: [],
-			   vehicles:[],
-			   planets:[],
-			   favorites: [],
+			], characters: [],
+			vehicles: [],
+			planets: [],
+			favorites: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -41,26 +41,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			getVehicles:async() =>{
-				const response = await fetch("https://www.swapi.tech/api/vehicles")
-				const data= await response.json()
-				setStore({vehicles: data.results})
-			},
-			getPlanets: async () => {
-				const response = await fetch("https://www.swapi.tech/api/planets")
-				const data= await response.json()
-				setStore({planets: data.results}) 
-			},
 			getCharacters: async () => {
 				const response = await fetch("https://www.swapi.tech/api/people")
-				const data= await response.json()
-				setStore({characters: data.results})
-			},  const addToLike : async (item) => {
-				if (!favoritos.includes(item)) {
-				  setLikes([...likes, item]);
+				const data = await response.json()
+				setStore({ characters: data.results })
+
+			}, getPlanets: async () => {
+				const response = await fetch("https://www.swapi.tech/api/planets")
+				const data = await response.json()
+				setStore({ planets: data.results })
+
+			},
+			getVehicles: async () => {
+				const response = await fetch("https://www.swapi.tech/api/vehicles")
+				const data = await response.json()
+				setStore({ vehicles: data.results })
+
+			},
+			handleFavorites: (name) => {
+				const store = getStore()
+				if (!store.favorites.includes(name)) {
+					setStore({ favorites: [...store.favorites, name] })
+				} else {
+					setStore({
+						favorites: store.favorites.filter(fav => fav !== name)
+					});
 				}
-			  };
-			
+
+			},
 		}
 	};
 };

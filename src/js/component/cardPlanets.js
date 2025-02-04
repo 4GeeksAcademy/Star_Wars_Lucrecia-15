@@ -1,34 +1,29 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import "../../styles/character.css";
-import { Context } from "../store/appContext"
+import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
+export const CardPlanets = ({ planet }) => {
+  const { store, actions } = useContext(Context)
 
-export const CardPlanets = (props) => {
-  const { store, actions } = useContext(Context);
-  const { info, setInfo } = useState([])
-
-  const infoPeople = async () => {
-    fetch(`https://www.swapi.tech/api/planets/${props.id}`)
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err))
+  const handleFavorite = (name) => {
+    actions.handleFavorites(name)
   }
 
-  useEffect (()=>{
-    infoPeople()
-  })
+  const isFavorites = () => {
+    return store.favorites.includes(planet.name)
+  }
+
 
   return (
-    <div className="card">
-      <img src={`https://starwars-visualguide.com/assets/img/planets/${props.id}.jpg`} className="card-img-top" alt="..." />
-      <div className="card-body">
-        <h5 className="card-title">Name:{props.name}</h5>
-        <p className="card-text">Model:{props.model}</p>
-        <p className="card-text">Passengers:{props.passengers}</p>
-        <div className="containerButton d-flex justify-content-between">
-          <a href="#" className="btn btn-warning">Learn More</a>
-          <button className="btn btn-warning p-2"><i class="fa-solid fa-heart"></i></button>
-        </div>
+    <div className="card col-2 p-0 position-relative mx-3" key={planet.uid || idx}>
+      <div className="img-container">
+        <img src={`https://starwars-visualguide.com/assets/img/planets/${planet.uid}.jpg`} className="card-img" alt={planet.name} />
+      </div>
+      <div className="card-body mb-4">
+        <h5 className="title pb-3 mt-2">{planet.name}</h5>
+        <Link to={`/planets/${planet.uid}`} className="btn btn-warning position-absolute bottom-0 start-0 mt-2">Read More</Link>
+        <button onClick={() => handleFavorite(planet.name)} className="btn btn-warning position-absolute bottom-0 end-0"><i class={`fa-solid fa-heart ${isFavorites() ? "text-danger" : ""}`}></i></button>
       </div>
     </div>
   );
