@@ -5,13 +5,12 @@
   padding: 0 60px;  
 }
 
-.card-body button {
+.card-body .btn {
   position: absolute;
   z-index: 10; 
   right: 10px;
   bottom: 10px; 
 }
-
 
 .card-img{
   object-fit: cover;
@@ -45,37 +44,37 @@
 
 @media (max-width: 768px) {
   .CarouselCard {
-    padding: 0 30px; /* Reduce el padding */
+    padding: 0 30px; 
   }
 
   .img-container {
-    height: 200px; /* Reduce la altura de la imagen en el carrusel */
+    height: 200px;
   }
 
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
-    padding: 12px; /* Reduce el tamaño de los botones */
+    padding: 12px;
   }
 
-  /* Ajustar la disposición de los nombres para que se alineen horizontalmente */
+  
   .card-name {
-    font-size: 10px; /* Reduce el tamaño de la fuente */
-    white-space: nowrap; /* Evita que los nombres se dividan en dos líneas */
-    text-overflow: ellipsis; /* Si el nombre es demasiado largo, agregamos puntos suspensivos */
+    font-size: 10px; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
     overflow: hidden;
   }
 
-  /* Asegurar que los botones no se superpongan */
+  
   .card-buttons {
-    flex-direction: column; /* Apila los botones verticalmente */
+    flex-direction: column; 
     gap: 10px;
   }
 }
 
-/* Media queries para pantallas pequeñas (móviles) */
+
 @media (max-width: 576px) {
   .CarouselCard {
-    padding: 0 5px; /* Reduce aún más el padding */
+    padding: 0 5px; 
   }
 
   .img-container {
@@ -87,7 +86,7 @@
     padding: 10px; 
   }
 
-  /* Ajustar aún más el tamaño del nombre para pantallas pequeñas */
+  
   .card-image {
     font-size: 14px;
     white-space: nowrap;
@@ -95,9 +94,9 @@
     overflow: hidden;
   }
 
-  /* Asegurar que los botones estén bien alineados */
+ 
   .card-buttons {
-    flex-direction: column; /* Los botones estarán apilados verticalmente */
+    flex-direction: column; 
     gap: 8px;
   }
 }
